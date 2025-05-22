@@ -7,6 +7,7 @@
          (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0"))
          (json . ("https://github.com/tree-sitter/tree-sitter-json" "v0.20.2"))
          (go . ("https://github.com/tree-sitter/tree-sitter-go" "v0.20.0"))
+         (java . ("https://github.com/tree-sitter/tree-sitter-java" "v0.23.5"))
          (python . ("https://github.com/tree-sitter/tree-sitter-python" "v0.20.4"))
          (toml "https://github.com/tree-sitter/tree-sitter-toml")
          (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
