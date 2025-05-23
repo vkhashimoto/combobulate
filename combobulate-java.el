@@ -39,26 +39,108 @@
 (eval-and-compile
   (defconst combobulate-java-definitions
     '(
+      (procedure-discard-rules '("line_comment" "block_comment"))
       (procedures-sibling
-       `((:activation-nodes
+       `(
+	 (:activation-nodes
+	  ((:nodes 
+	    ((rule "method_invocation"))
+	    :position at
+	    :has-ancestor ("block")))
+	  :selector (:choose
+		     parent 
+		     :match-children t))
+	 (:activation-nodes
+	  ((:nodes 
+	    ((rule "element_value_pair"))
+	    :position at
+	    :has-ancestor ("annotation_argument_list")))
+	  :selector (:choose
+		     parent
+		     :match-children t))
+	 (:activation-nodes
+	  ((:nodes 
+	    ((rule "formal_parameters"))
+	    :position at))
+	  :selector (:choose
+		     node
+		     :match-siblings t))
+	 (:activation-nodes
+	   ((:nodes 
+	     (("import_declaration" "package_declaration" "class_declaration"))
+	     :position at
+	     :has-parent ("program")))
+	   :selector (:choose
+		      parent
+		      :match-children t))
+	 (:activation-nodes
+	  ((:nodes 
+	    ((rule "field_declaration"))
+	    :position at
+	    :has-parent ("field_declaration" ;;"class_body"
+			 )))
+	  :selector (:choose
+		     parent 
+		     :match-siblings t))
+	 (:activation-nodes
+	  ((:nodes 
+	    ((rule "constructor_declaration"))
+	    :position at
+	    :has-parent ("constructor_declaration" "class_body")))
+	  :selector (:choose
+		     parent 
+		     :match-siblings t))
+	 ;; annotations ("marker_annotation") is part of "method_declaration"
+	 (:activation-nodes
+	  ((:nodes 
+	    ((rule "method_declaration"))
+	    :position at
+	    :has-parent ("method_declaration" "class_body")))
+	  :selector (:choose
+		     parent 
+		     :match-siblings t))
+
+	 (:activation-nodes
+	  ((:nodes 
+	    ((rule "class_declaration"))
+	    :position at
+	    :has-ancestor ("class_body")))
+	  :selector (:choose
+		     parent 
+		     :match-children t))
+	 (:activation-nodes
+	  ((:nodes 
+	    ((rule "expression_statement") (irule "type_identifier"))
+	    :position at
+	    :has-ancestor ("constructor_body")))
+	  :selector (:choose
+		     parent 
+		     :match-children t))
+	 (:activation-nodes
+	  ((:nodes 
+	    (("type_identifier"))
+	    :position at
+	    :has-parent ("type_arguments")))
+	  :selector (:choose
+		     node
+		     :match-siblings t))
+	 (:activation-nodes
 	  ((:nodes 
 	    ((rule "block"))
 	    :position at
 	    :has-parent ("block")))
 	  :selector (:choose
 		     parent 
-		     :match-children t)))))))
+		     :match-children t))
+)))))
 
 (define-combobulate-language
  :name java
  :language java
- :major-modes (java-ts-mode)
+ :major-modes (java-mode java-ts-mode)
  :custom combobulate-java-definitions
  :setup-fn combobulate-java-setup)
 
 (defun combobulate-java-setup (_))
 
 (provide 'combobulate-java)
-
-
-
