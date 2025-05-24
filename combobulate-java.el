@@ -75,39 +75,11 @@
 		      :match-children t))
 	 (:activation-nodes
 	  ((:nodes 
-	    ((rule "field_declaration"))
-	    :position at
-	    :has-parent ("field_declaration" ;;"class_body"
-			 )))
+	    ((rule "class_body"))
+	    :position at))
 	  :selector (:choose
-		     parent 
+		     node
 		     :match-siblings t))
-	 (:activation-nodes
-	  ((:nodes 
-	    ((rule "constructor_declaration"))
-	    :position at
-	    :has-parent ("constructor_declaration" "class_body")))
-	  :selector (:choose
-		     parent 
-		     :match-siblings t))
-	 ;; annotations ("marker_annotation") is part of "method_declaration"
-	 (:activation-nodes
-	  ((:nodes 
-	    ((rule "method_declaration"))
-	    :position at
-	    :has-parent ("method_declaration" "class_body")))
-	  :selector (:choose
-		     parent 
-		     :match-siblings t))
-
-	 (:activation-nodes
-	  ((:nodes 
-	    ((rule "class_declaration"))
-	    :position at
-	    :has-ancestor ("class_body")))
-	  :selector (:choose
-		     parent 
-		     :match-children t))
 	 (:activation-nodes
 	  ((:nodes 
 	    ((rule "expression_statement") (irule "type_identifier"))
@@ -124,14 +96,6 @@
 	  :selector (:choose
 		     node
 		     :match-siblings t))
-	 (:activation-nodes
-	  ((:nodes 
-	    ((rule "block"))
-	    :position at
-	    :has-parent ("block")))
-	  :selector (:choose
-		     parent 
-		     :match-children t))
 )))))
 
 (define-combobulate-language
