@@ -58,6 +58,7 @@
 	  :selector (:choose
 		     parent
 		     :match-children t))
+	 ;; Method arguments
 	 (:activation-nodes
 	  ((:nodes 
 	    ((rule "formal_parameters"))
@@ -65,6 +66,7 @@
 	  :selector (:choose
 		     node
 		     :match-siblings t))
+	 ;; Package / Imports / Class Declaration
 	 (:activation-nodes
 	   ((:nodes 
 	     (("import_declaration" "package_declaration" "class_declaration"))
@@ -73,6 +75,7 @@
 	   :selector (:choose
 		      parent
 		      :match-children t))
+	 ;; Fields / methods declaration
 	 (:activation-nodes
 	  ((:nodes 
 	    ((rule "class_body"))
@@ -88,6 +91,7 @@
 	  :selector (:choose
 		     parent 
 		     :match-children t))
+	 ;; Generics
 	 (:activation-nodes
 	  ((:nodes 
 	    (("type_identifier"))
