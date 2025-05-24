@@ -9,7 +9,7 @@ LABEL MAINTAINER="Mickey Petersen at mastering emacs" \
       FOO="bar"
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN sed -i 's/# deb-src/deb-src/' /etc/apt/sources.list \
+RUN sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources \
     && apt-get update \
     && apt-get build-dep -y emacs
 
@@ -50,10 +50,10 @@ ENV JOBS=4
 WORKDIR /opt
 
 # Install the grammars
-COPY .ts-setup.el /opt
-RUN emacs --batch -L $PWD -l .ts-setup.el
-
 COPY . /opt/
 RUN cd /opt/
-ENTRYPOINT ["make",  "foo"]
+RUN emacs --batch -L $PWD -l tests/.ts-setup.el
+
+
+ENTRYPOINT ["make"]
 
