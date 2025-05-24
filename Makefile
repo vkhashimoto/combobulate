@@ -76,6 +76,10 @@ docker-build-tests: docker-build
 docker-run-tests: docker-build
 	$(DOCKER_CMD) run-tests
 
+.PHONY:	docker-build-run-tests
+docker-build-run-tests: docker-build
+	$(DOCKER_CMD) build-tests run-tests
+
 clean: clean-elc clean-tests
 	rm -rf $(TMP_INIT_DIR)
 

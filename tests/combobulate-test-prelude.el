@@ -36,6 +36,7 @@
 (require 'js)
 (require 'yaml-ts-mode)
 (require 'json-ts-mode)
+(require 'java-ts-mode)
 
 ;;; Helpers for writing procedures
 
