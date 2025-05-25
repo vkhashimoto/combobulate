@@ -50,6 +50,7 @@
 	  :selector (:choose
 		     parent 
 		     :match-children t))
+	 ;; Annotation values
 	 (:activation-nodes
 	  ((:nodes 
 	    ((rule "element_value_pair"))
